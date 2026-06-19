@@ -192,7 +192,7 @@ function Index() {
                   to="/data"
                   className="inline-flex items-center gap-2 rounded-full bg-gradient-sunset px-6 py-3 font-semibold text-primary-foreground shadow-elevated transition hover:shadow-glow"
                 >
-                  Explore the forecast →
+                  Explore the forecast
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.96 }}>
