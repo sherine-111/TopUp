@@ -12,8 +12,47 @@ if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
     
-    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
-    current_string = ""
+        emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🪷", "🏖️"]
+    
+    # Cycle through each emoji individually, replacing the previous one
+    for emoji in emoji_sequence:
+        loading_placeholder.markdown(f"""
+            <style>
+            @import url('https://googleapis.com');
+            .load-screen {{
+                position: fixed;
+                top: 0; left: 0; width: 100vw; height: 100vh;
+                background-color: #ffffff !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 999999;
+                font-family: 'Inter', sans-serif;
+            }}
+            .load-emoji-bar {{
+                font-size: 4.5rem;
+                margin-bottom: 24px;
+                min-height: 6rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }}
+            .load-text-bar {{
+                font-size: 1.35rem;
+                color: #000000;
+                font-weight: 500;
+                letter-spacing: -0.3px;
+            }}
+            </style>
+            <div class="load-screen">
+                <div class="load-emoji-bar">{emoji}</div>
+                <div class="load-text-bar">Your TopUp is loading...</div>
+            </div>
+        """, unsafe_allow_html=True)
+        time.sleep(0.7)
+        
+    loading_placeholder.empty()
     
     # Loop through emojis one by one to create a progressive revealing effect
     for emoji in emoji_sequence:
