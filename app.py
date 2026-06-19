@@ -233,7 +233,7 @@ function Index() {
               to="/table"
               className="hidden text-sm font-semibold text-primary hover:underline sm:inline"
             >
-              View full log →
+              View full log
             </Link>
           </div>
 
