@@ -64,7 +64,7 @@ st.session_state['topup_engine'] = {
 # 🎨 PASTE YOUR LOVABLE HTML/CSS FRONTEND ELEMENTS DIRECTLY BELOW THIS LINE
 # ==============================================================================
 st.info("Backend data architecture ready. Please paste your custom Lovable UI elements directly below this card.")
-import { AnimatePresence, motion } from "motion/react";
+# import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { UploadDropzone } from "@/components/UploadDropzone";
