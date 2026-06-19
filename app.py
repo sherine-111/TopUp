@@ -5,9 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import time
-from sklearn.linear_model import LinearRegression
 
-# --- 1. SEQUENTIAL EMOJI LOADING SYSTEM (PLAIN WHITE SCREEN) ---
+# --- 1. PRODUCER LOADING ANIMATION MATRIX ---
 if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
@@ -30,18 +29,18 @@ if 'loaded' not in st.session_state:
                 font-family: 'Inter', sans-serif;
             }}
             .load-emoji-bar {{
-                font-size: 4.5rem;
-                margin-bottom: 24px;
-                min-height: 6rem;
+                font-size: 5rem;
+                margin-bottom: 20px;
+                min-height: 7rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }}
             .load-text-bar {{
-                font-size: 1.35rem;
+                font-size: 1.4rem;
                 color: #000000;
                 font-weight: 500;
-                letter-spacing: -0.3px;
+                letter-spacing: -0.5px;
             }}
             </style>
             <div class="load-screen">
@@ -53,62 +52,90 @@ if 'loaded' not in st.session_state:
         
     loading_placeholder.empty()
 
-# --- 2. ROBINHOOD-STYLE TYPOGRAPHY DESIGN ---
+# --- 2. THEMATIC STYLE LAYOUT & SPECIFICATION INTERFACE ---
 st.set_page_config(page_title="TopUp", layout="wide")
 
 st.markdown("""
     <style>
     @import url('https://googleapis.com');
     
-    /* Robinhood Minimalist Framework Setup */
+    /* Global Canvas Reset to Exact Five-Stage Color Spectrum File Specs */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background-color: #ffffff !important;
+        background: linear-gradient(to right, #f18721 0%, #f9c89e 35%, #ffffff 50%, #f9caf4 65%, #f182ea 100%) !important;
         color: #000000 !important;
     }
     
-    /* Premium Multi-Stage Image Gradient Text */
-    .brand-title {
-        background: linear-gradient(to right, #f18721 0%, #f9c89e 35%, #ffffff 50%, #f9caf4 65%, #f182ea 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 4.5rem;
+    /* Cover Page Branding Headers */
+    .meta-header-grid {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 30px;
+    }
+    .meta-item {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ff416c;
+    }
+    .hero-main-title {
+        font-size: 6rem;
         font-weight: 800;
-        letter-spacing: -2px;
-        margin-bottom: 0px;
-        line-height: 1.05;
+        letter-spacing: -3px;
+        color: #000000;
+        line-height: 0.9;
+        margin-bottom: 25px;
     }
     
-    .brand-subtitle {
-        font-family: 'Inter', sans-serif;
-        color: #6e6e73;
-        font-size: 1.4rem;
+    /* Minimalist White Card Block Specs */
+    .white-description-card {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        max-width: 440px;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #ff416c;
         font-weight: 400;
-        margin-top: 5px;
-        margin-bottom: 40px;
-        letter-spacing: -0.4px;
     }
-
-    /* Minimalist High-Fidelity App Card Canvas Panels */
+    
+    /* Interactive Elements Highlight Modules */
     .gradient-container-card {
-        background: linear-gradient(135deg, #f18721 0%, #f9c89e 45%, #f9caf4 75%, #f182ea 100%);
+        background: rgba(255, 255, 255, 0.9);
         color: #000000;
         padding: 24px;
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 8px 32px rgba(241, 135, 33, 0.06);
         margin-top: 20px;
         margin-bottom: 30px;
     }
     
-    h3 {
-        font-weight: 700 !important;
-        letter-spacing: -0.8px !important;
-        color: #000000 !important;
+    /* Bouncing Scroll Indicator Icon */
+    .scroll-arrow-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        margin-bottom: 80px;
+        width: 100%;
+    }
+    .scroll-arrow {
+        font-size: 2.5rem;
+        color: #000000;
+        animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. DATA ARCHITECTURE LAYER ---
+# --- 3. DATA & MODEL ARCHITECTURE SUBSYSTEM ---
 if 'custom_data' not in st.session_state:
     st.session_state['custom_data'] = None
 
@@ -134,46 +161,54 @@ historical_weather = pd.DataFrame({
 })
 analysis_df = pd.merge(df, historical_weather, on='Date', how='inner')
 
-# --- 4. FIRST PAGE LANDING HERO (COVER VIEW) ---
-st.markdown('<p class="brand-title">TopUp</p>', unsafe_allow_html=True)
-st.markdown('<p class="brand-subtitle">AC Expense Velocity & Climate Forecaster</p>', unsafe_allow_html=True)
+# Mathematical calculation formulas bypassing sklearn wrappers to avoid type mismatches
+x_train_arr = np.array([31.2, 32.5, 33.1, 32.8, 29.4])
+y_train_arr = np.array([13.11, 11.75, 9.34, 11.29, 4.39])
+slope, intercept = np.polyfit(x_train_arr, y_train_arr, 1)
 
-st.markdown("""
-### Overview
-Welcome to TopUp. This platform models room micro-climate utility velocity inside HKUST student housing. 
-By compiling real-time financial recharge metrics alongside local geographical temperature variables, 
-TopUp maps capital burn curves and leverages predictive machine learning models to help you stay ahead of utility expenses.
-""")
+# --- 4. PRETTIFIED SPLIT-SCREEN LANDING PAGE (COVER VIEW) ---
+hero_col1, hero_col2 = st.columns([1, 1.1], gap="large")
 
-st.write(" ")
-st.write(" ")
-st.write(" ")
-st.write(" ")
-st.write("---")
+with hero_col1:
+    st.markdown("""
+        <div class="meta-header-grid">
+            <div class="meta-item">Since<br><span style="color:#000000; font-weight:700;">June 2026</span></div>
+            <div class="meta-item">Created By<br><span style="color:#000000; font-weight:700;">@sherine111</span></div>
+        </div>
+        <div class="hero-main-title">TopUp</div>
+        <div class="white-description-card">
+            Welcome to TopUp. This platform analyzes the microclimate of rooms in student residences. 
+            By combining real-time financial reload data with local temperature, TopUp anticipates your 
+            expenses using machine learning models.
+        </div>
+    """, unsafe_allow_html=True)
 
-# --- 5. SCROLLING STEP LAYER SECTION ---
-st.markdown("### Dual-Axis Correlation Visualizer")
+with hero_col2:
+    # High-fidelity integrated chart wrapper simulation matching mockup dashboard
+    fig, ax1 = plt.subplots(figsize=(6.5, 4.2), facecolor='white')
+    ax1.set_facecolor('#ffffff')
+    sns.set_theme(style="whitegrid")
+    
+    color = '#bc6c74'
+    ax1.set_xlabel('Top-Up Start Date', fontweight='bold', fontsize=8)
+    ax1.set_ylabel('Daily Burn Rate (HKD / Day)', color=color, fontweight='bold', fontsize=8)
+    sns.barplot(data=analysis_df, x='Date', y='Daily_Burn_Rate_HKD', color=color, alpha=0.8, ax=ax1)
+    ax1.tick_params(axis='both', labelsize=7)
+    
+    ax2 = ax1.twinx()
+    color = '#1d70b8'
+    ax2.set_ylabel('Observed Max Temperature (°C)', color=color, fontweight='bold', fontsize=8)
+    sns.lineplot(data=analysis_df, x=range(len(analysis_df)), y='Max_Temp_C', color=color, marker='o', linewidth=2.5, ax=ax2)
+    ax2.tick_params(axis='y', labelsize=7)
+    
+    plt.title('HKUST Hall AC Expense Velocity vs. Regional Temperature', fontsize=9, fontweight='bold', pad=10)
+    fig.tight_layout()
+    st.pyplot(fig)
 
-fig, ax1 = plt.subplots(figsize=(11, 4), facecolor='none')
-ax1.set_facecolor('none')
-sns.set_theme(style="white")
+# Centered Scrolling Chevron Indicator
+st.markdown('<div class="scroll-arrow-box"><div class="scroll-arrow">︾</div></div>', unsafe_allow_html=True)
 
-color = '#f18721'
-ax1.set_xlabel('Top-Up Start Date', fontweight='semibold')
-ax1.set_ylabel('Daily Burn Rate (HKD / Day)', color=color, fontweight='semibold')
-sns.barplot(data=analysis_df, x='Date', y='Daily_Burn_Rate_HKD', color=color, alpha=0.8, ax=ax1)
-ax1.tick_params(axis='y', labelcolor=color)
-
-ax2 = ax1.twinx()
-color = '#f182ea'
-ax2.set_ylabel('Observed Max Temperature (°C)', color=color, fontweight='semibold')
-sns.lineplot(data=analysis_df, x=range(len(analysis_df)), y='Max_Temp_C', color=color, marker='o', linewidth=3, ax=ax2)
-ax2.tick_params(axis='y', labelcolor=color)
-
-fig.tight_layout()
-st.pyplot(fig)
-
-st.write(" ")
+# --- 5. SCROLLING LAYERS: DATA METRICS & FORECASTER ---
 st.markdown("### Portfolio Metrics Summary")
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -185,19 +220,16 @@ with col3:
 
 st.dataframe(analysis_df[['Date', 'Amount_HKD', 'Days_Lasted', 'Daily_Burn_Rate_HKD', 'Max_Temp_C']], use_container_width=True)
 
-# --- 6. PREDICTIVE MACHINE LEARNING SECTION ---
 st.write("---")
-st.markdown("### Machine Learning Forecast Canvas")
 
-X_train = np.array([31.2, 32.5, 33.1, 32.8, 29.4]).reshape(-1, 1)
-y_train = np.array([13.11, 11.75, 9.34, 11.29, 4.39])
-model = LinearRegression().fit(X_train, y_train)
+# ML INTERACTIVE MODEL ENGINE CANVAS
+st.markdown("### Machine Learning Forecast Canvas")
+st.markdown("Adjust the weather simulation slider below to dynamically estimate your upcoming card balance strain.")
 
 simulated_temp = st.slider("Simulated Next-Week Temperature Peak (°C)", min_value=24.0, max_value=38.0, value=33.0, step=0.5)
 
-predicted_burn = model.predict(np.array([[simulated_temp]]))
-
-burn_scalar = float(predicted_burn)
+# Execution block utilizing clear scalar variables to perfectly resolve folder/TypeErrors
+burn_scalar = float(simulated_temp * slope + intercept)
 weekly_total_scalar = float(burn_scalar * 7)
 
 st.markdown(f"""
@@ -208,7 +240,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# --- 7. BOTTOM LEVEL DATA ZONE ---
+# --- 6. DATA CONSOLE UPLOADER DROPZONE (BOTTOM ANCHOR) ---
 st.write("---")
 st.markdown("### Step 1: Upload Portfolio Log")
 uploaded_file = st.file_uploader("Upload your raw topups.csv file to sync your active terminal history", type=["csv"])
