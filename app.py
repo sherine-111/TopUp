@@ -309,7 +309,9 @@ function PageCard({
         className="group relative block overflow-hidden rounded-3xl glass-card p-8 transition hover:shadow-elevated"
       >
 st.markdown(f"""
+st.markdown(f"""
     <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br {tint} opacity-40 blur-2xl transition group-hover:opacity-70"></div>
+""", unsafe_allow_html=True)
 """, unsafe_allow_html=True)        <div className="relative">
           <div className="text-5xl">{emoji}</div>
           <div className="mt-6 text-xs font-semibold uppercase tracking-wider text-primary">
