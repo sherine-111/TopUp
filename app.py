@@ -7,101 +7,110 @@ import numpy as np
 import time
 from sklearn.linear_model import LinearRegression
 
-# --- 1. DELAYED LOADING SEQUENCE ---
+# --- 1. SEQUENTIAL EMOJI LOADING SYSTEM (PLAIN WHITE SCREEN) ---
 if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
     
-    loading_placeholder.markdown("""
-        <style>
-        @import url('https://googleapis.com');
-        .loading-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 75vh;
-            font-family: 'Inter', sans-serif;
-            text-align: center;
-            background: #fafafa;
-        }
-        .loading-emojis {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 8px;
-        }
-        .loading-text {
-            font-size: 1.4rem;
-            color: #f18721;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-        </style>
-        <div class="loading-container">
-            <div class="loading-emojis">☀️ 🌧️ 🌈 ☁️ 🇭🇰 🪷 🏖️</div>
-            <div class="loading-text">your TopUp is loading...</div>
-        </div>
-    """, unsafe_allow_html=True)
+    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
+    current_string = ""
     
-    time.sleep(5)
+    # Loop through emojis one by one to create a progressive revealing effect
+    for emoji in emoji_sequence:
+        current_string += emoji + " "
+        loading_placeholder.markdown(f"""
+            <style>
+            @import url('https://googleapis.com');
+            .load-screen {{
+                position: fixed;
+                top: 0; left: 0; width: 100vw; height: 100vh;
+                background-color: #ffffff !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 999999;
+                font-family: 'Inter', sans-serif;
+            }}
+            .load-emoji-bar {{
+                font-size: 3.5rem;
+                margin-bottom: 24px;
+                min-height: 5rem;
+                letter-spacing: 4px;
+            }}
+            .load-text-bar {{
+                font-size: 1.35rem;
+                color: #000000;
+                font-weight: 500;
+                letter-spacing: -0.3px;
+            }}
+            </style>
+            <div class="load-screen">
+                <div class="load-emoji-bar">{current_string}</div>
+                <div class="load-text-bar">Your TopUp is loading...</div>
+            </div>
+        """, unsafe_allow_html=True)
+        time.sleep(0.7) # 7 steps * 0.7s gives exactly ~5 seconds of loading time
+        
     loading_placeholder.empty()
 
-# --- 2. PREMIUM TYPOGRAPHY & FIVE-STAGE GRAPHIC GRADIENT THEME ---
+# --- 2. ROBINHOOD-STYLE TYPOGRAPHY DESIGN ---
 st.set_page_config(page_title="TopUp", layout="wide")
 
 st.markdown("""
     <style>
     @import url('https://googleapis.com');
     
-    /* Universal Typeface Alignment */
+    /* Robinhood Minimalist Framework Setup */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background-color: #fcfcfc;
+        background-color: #ffffff !important;
+        color: #000000 !important;
     }
     
-    /* Title Layer with Exact Custom Image Gradient Spectrum */
+    /* Premium Multi-Stage Image Gradient Text */
     .brand-title {
-        background: linear-gradient(to right, #f18721 0%, #f9c89e 35%, #9e9e9e 50%, #f9caf4 65%, #f182ea 100%);
+        background: linear-gradient(to right, #f18721 0%, #f9c89e 35%, #ffffff 50%, #f9caf4 65%, #f182ea 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-size: 4rem;
+        font-size: 4.5rem;
         font-weight: 800;
-        letter-spacing: -1.5px;
+        letter-spacing: -2px;
         margin-bottom: 0px;
-        line-height: 1.1;
+        line-height: 1.05;
     }
     
     .brand-subtitle {
         font-family: 'Inter', sans-serif;
-        color: #64748b;
-        font-size: 1.2rem;
+        color: #6e6e73;
+        font-size: 1.4rem;
         font-weight: 400;
-        margin-top: -5px;
-        margin-bottom: 30px;
-        letter-spacing: -0.2px;
+        margin-top: 5px;
+        margin-bottom: 40px;
+        letter-spacing: -0.4px;
     }
 
-    /* Highlighted Custom Card Panels using the Orange-to-Pink Theme Mapping */
+    /* Minimalist High-Fidelity App Card Canvas Panels */
     .gradient-container-card {
         background: linear-gradient(135deg, #f18721 0%, #f9c89e 45%, #f9caf4 75%, #f182ea 100%);
-        color: #1e293b;
+        color: #000000;
         padding: 24px;
-        border-radius: 14px;
-        box-shadow: 0 4px 20px rgba(241, 135, 33, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         margin-top: 20px;
         margin-bottom: 30px;
     }
     
-    /* Interactive Slider Custom Styling Highlights */
-    div[data-testid="stSlider"] > label {
-        font-weight: 600 !important;
-        color: #1e293b !important;
+    /* Style headers cleanly without emojis */
+    h3 {
+        font-weight: 700 !important;
+        letter-spacing: -0.8px !important;
+        color: #000000 !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. DATA COMPUTATION SUBSYSTEM ---
+# --- 3. DATA ARCHITECTURE LAYER ---
 if 'custom_data' not in st.session_state:
     st.session_state['custom_data'] = None
 
@@ -127,34 +136,50 @@ historical_weather = pd.DataFrame({
 })
 analysis_df = pd.merge(df, historical_weather, on='Date', how='inner')
 
-# --- 4. TOP HERO COVER PAGE ---
+# --- 4. FIRST PAGE LANDING HERO (COVER VIEW) ---
 st.markdown('<p class="brand-title">TopUp</p>', unsafe_allow_html=True)
 st.markdown('<p class="brand-subtitle">AC Expense Velocity & Climate Forecaster</p>', unsafe_allow_html=True)
 
-# Main Cover Graph
-fig, ax1 = plt.subplots(figsize=(11, 4))
-sns.set_theme(style="whitegrid")
+# Clean Text Overview Section (Before Scroll)
+st.markdown("""
+### Overview
+Welcome to TopUp. This platform models room micro-climate utility velocity inside HKUST student housing. 
+By compiling real-time financial recharge metrics alongside local geographical temperature variables, 
+TopUp maps capital burn curves and leverages predictive machine learning models to help you stay ahead of utility expenses.
+""")
 
-color = '#f18721'  # Matches Left Orange Spectrum Accent
-ax1.set_xlabel('Top-Up Start Date', fontweight='bold', family='sans-serif')
-ax1.set_ylabel('Daily Burn Rate (HKD / Day)', color=color, fontweight='bold', family='sans-serif')
-sns.barplot(data=analysis_df, x='Date', y='Daily_Burn_Rate_HKD', color=color, alpha=0.7, ax=ax1)
+# Generous whitespace block to separate cover title overview from subsequent data visualizations
+st.write(" ")
+st.write(" ")
+st.write(" ")
+st.write(" ")
+st.write("---")
+
+# --- 5. SCROLLING STEP LAYER SECTION ---
+st.markdown("### Dual-Axis Correlation Visualizer")
+
+fig, ax1 = plt.subplots(figsize=(11, 4), facecolor='none')
+ax1.set_facecolor('none')
+sns.set_theme(style="white")
+
+color = '#f18721'
+ax1.set_xlabel('Top-Up Start Date', fontweight='semibold')
+ax1.set_ylabel('Daily Burn Rate (HKD / Day)', color=color, fontweight='semibold')
+sns.barplot(data=analysis_df, x='Date', y='Daily_Burn_Rate_HKD', color=color, alpha=0.8, ax=ax1)
 ax1.tick_params(axis='y', labelcolor=color)
 
 ax2 = ax1.twinx()
-color = '#f182ea'  # Matches Right Pink Spectrum Accent
-ax2.set_ylabel('Observed Max Temperature (°C)', color=color, fontweight='bold', family='sans-serif')
+color = '#f182ea'
+ax2.set_ylabel('Observed Max Temperature (°C)', color=color, fontweight='semibold')
 sns.lineplot(data=analysis_df, x=range(len(analysis_df)), y='Max_Temp_C', color=color, marker='o', linewidth=3, ax=ax2)
 ax2.tick_params(axis='y', labelcolor=color)
 
 fig.tight_layout()
 st.pyplot(fig)
 
-# --- 5. MIDDLE LAYER ANALYSIS & SCROLL CONTENT ---
+# Metrics Grid Section
 st.write(" ")
-st.write(" ")
-st.markdown("### Portfolio Metrics Overview")
-
+st.markdown("### Portfolio Metrics Summary")
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Max Daily Burn Velocity", f"${analysis_df['Daily_Burn_Rate_HKD'].max():.2f} HKD/Day")
@@ -165,7 +190,7 @@ with col3:
 
 st.dataframe(analysis_df[['Date', 'Amount_HKD', 'Days_Lasted', 'Daily_Burn_Rate_HKD', 'Max_Temp_C']], use_container_width=True)
 
-# --- 6. PREDICTIVE ML PANEL ---
+# --- 6. PREDICTIVE MACHINE LEARNING SECTION ---
 st.write("---")
 st.markdown("### Machine Learning Forecast Canvas")
 
@@ -176,20 +201,23 @@ model = LinearRegression().fit(X_train, y_train)
 simulated_temp = st.slider("Simulated Next-Week Temperature Peak (°C)", min_value=24.0, max_value=38.0, value=33.0, step=0.5)
 
 predicted_burn = model.predict(np.array([[simulated_temp]]))
-estimated_weekly_total = predicted_burn * 7
 
-# Visual Output Card Using Selected Color Gradient Space
+# FIXED ERROR CODE: Safely converted array outputs to clean scalar floats before passing to formatting engine
+burn_scalar = float(predicted_burn[0])
+weekly_total_scalar = float(burn_scalar * 7)
+
 st.markdown(f"""
     <div class="gradient-container-card">
-        <h4 style="margin:0; padding-bottom:8px; font-weight:700; font-size:1.25rem;">Algorithmic Target Estimates</h4>
-        <p style="margin:0; font-size:1.1rem; padding-bottom:4px;">Predicted Daily Cash Burn Velocity: <b>${predicted_burn:.2f} HKD / Day</b></p>
-        <p style="margin:0; font-size:1.1rem;">Suggested 7-Day Card Top-Up Target: <b>${estimated_weekly_total:.2f} HKD</b></p>
+        <h4 style="margin:0; padding-bottom:8px; font-weight:700;">Algorithmic Target Estimates</h4>
+        <p style="margin:0; font-size:1.1rem; padding-bottom:4px;">Predicted Daily Cash Burn Velocity: <b>${burn_scalar:.2f} HKD / Day</b></p>
+        <p style="margin:0; font-size:1.1rem;">Suggested 7-Day Card Top-Up Target: <b><b>${weekly_total_scalar:.2f} HKD</b></p>
     </div>
 """, unsafe_allow_html=True)
 
-# --- 7. BOTTOM LEVEL PLACEMENT DATA DROPZONE ---
+# --- 7. BOTTOM LEVEL DATA ZONE ---
 st.write("---")
-st.markdown("### 📁 Step 1: Upload Portfolio Log")
+st.sidebar.markdown("") # Force empty sidebar container context separation
+st.markdown("### Step 1: Upload Portfolio Log")
 uploaded_file = st.file_uploader("Upload your raw topups.csv file to sync your active terminal history", type=["csv"])
 
 if uploaded_file is not None:
