@@ -12,7 +12,7 @@ if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
     
-        emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🪷", "🏖️"]
+        emoji_sequence = ["☀️", "🌧️", "🌈","☁️", "🪷", "🏖️"]
     
     # Cycle through each emoji individually, replacing the previous one
     for emoji in emoji_sequence:
