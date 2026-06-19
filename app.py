@@ -70,7 +70,6 @@ st.info("Backend data architecture ready. Please paste your custom Lovable UI el
 import { NavBar } from "@/components/NavBar";
 import { UploadDropzone } from "@/components/UploadDropzone";
 import { METRICS } from "@/lib/topup-data";
-"""
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -332,3 +331,4 @@ st.markdown(f"""
     </motion.div>
   );
 }
+"""
