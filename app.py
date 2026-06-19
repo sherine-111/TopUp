@@ -12,9 +12,8 @@ if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
     
-        emoji_sequence = ["☀️", "🌧️", "🌈","☁️", "🪷", "🏖️"]
+    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
     
-    # Cycle through each emoji individually, replacing the previous one
     for emoji in emoji_sequence:
         loading_placeholder.markdown(f"""
             <style>
@@ -51,45 +50,6 @@ if 'loaded' not in st.session_state:
             </div>
         """, unsafe_allow_html=True)
         time.sleep(0.7)
-        
-    loading_placeholder.empty()
-    
-    # Loop through emojis one by one to create a progressive revealing effect
-    for emoji in emoji_sequence:
-        current_string += emoji + " "
-        loading_placeholder.markdown(f"""
-            <style>
-            @import url('https://googleapis.com');
-            .load-screen {{
-                position: fixed;
-                top: 0; left: 0; width: 100vw; height: 100vh;
-                background-color: #ffffff !important;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                z-index: 999999;
-                font-family: 'Inter', sans-serif;
-            }}
-            .load-emoji-bar {{
-                font-size: 3.5rem;
-                margin-bottom: 24px;
-                min-height: 5rem;
-                letter-spacing: 4px;
-            }}
-            .load-text-bar {{
-                font-size: 1.35rem;
-                color: #000000;
-                font-weight: 500;
-                letter-spacing: -0.3px;
-            }}
-            </style>
-            <div class="load-screen">
-                <div class="load-emoji-bar">{current_string}</div>
-                <div class="load-text-bar">Your TopUp is loading...</div>
-            </div>
-        """, unsafe_allow_html=True)
-        time.sleep(0.7) # 7 steps * 0.7s gives exactly ~5 seconds of loading time
         
     loading_placeholder.empty()
 
@@ -140,7 +100,6 @@ st.markdown("""
         margin-bottom: 30px;
     }
     
-    /* Style headers cleanly without emojis */
     h3 {
         font-weight: 700 !important;
         letter-spacing: -0.8px !important;
@@ -179,7 +138,6 @@ analysis_df = pd.merge(df, historical_weather, on='Date', how='inner')
 st.markdown('<p class="brand-title">TopUp</p>', unsafe_allow_html=True)
 st.markdown('<p class="brand-subtitle">AC Expense Velocity & Climate Forecaster</p>', unsafe_allow_html=True)
 
-# Clean Text Overview Section (Before Scroll)
 st.markdown("""
 ### Overview
 Welcome to TopUp. This platform models room micro-climate utility velocity inside HKUST student housing. 
@@ -187,7 +145,6 @@ By compiling real-time financial recharge metrics alongside local geographical t
 TopUp maps capital burn curves and leverages predictive machine learning models to help you stay ahead of utility expenses.
 """)
 
-# Generous whitespace block to separate cover title overview from subsequent data visualizations
 st.write(" ")
 st.write(" ")
 st.write(" ")
@@ -216,7 +173,6 @@ ax2.tick_params(axis='y', labelcolor=color)
 fig.tight_layout()
 st.pyplot(fig)
 
-# Metrics Grid Section
 st.write(" ")
 st.markdown("### Portfolio Metrics Summary")
 col1, col2, col3 = st.columns(3)
@@ -241,21 +197,19 @@ simulated_temp = st.slider("Simulated Next-Week Temperature Peak (°C)", min_val
 
 predicted_burn = model.predict(np.array([[simulated_temp]]))
 
-# FIXED ERROR CODE: Safely converted array outputs to clean scalar floats before passing to formatting engine
-burn_scalar = float(predicted_burn[0])
+burn_scalar = float(predicted_burn)
 weekly_total_scalar = float(burn_scalar * 7)
 
 st.markdown(f"""
     <div class="gradient-container-card">
         <h4 style="margin:0; padding-bottom:8px; font-weight:700;">Algorithmic Target Estimates</h4>
         <p style="margin:0; font-size:1.1rem; padding-bottom:4px;">Predicted Daily Cash Burn Velocity: <b>${burn_scalar:.2f} HKD / Day</b></p>
-        <p style="margin:0; font-size:1.1rem;">Suggested 7-Day Card Top-Up Target: <b><b>${weekly_total_scalar:.2f} HKD</b></p>
+        <p style="margin:0; font-size:1.1rem;">Suggested 7-Day Card Top-Up Target: <b>${weekly_total_scalar:.2f} HKD</b></p>
     </div>
 """, unsafe_allow_html=True)
 
 # --- 7. BOTTOM LEVEL DATA ZONE ---
 st.write("---")
-st.sidebar.markdown("") # Force empty sidebar container context separation
 st.markdown("### Step 1: Upload Portfolio Log")
 uploaded_file = st.file_uploader("Upload your raw topups.csv file to sync your active terminal history", type=["csv"])
 
