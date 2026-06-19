@@ -175,7 +175,7 @@ function Index() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-              Live · Founded June 2026
+              Live - Founded June 2026
             </span>
             <h1 className="mt-6 font-display text-6xl font-bold leading-[0.95] tracking-tight sm:text-7xl md:text-8xl">
               Forecast your <br />
