@@ -272,7 +272,7 @@ function Index() {
         </section>
 
         <footer className="border-t border-border/60 py-8 text-center text-xs text-muted-foreground">
-          TopUp · est. June 2026 · made with sunsets by{" "}
+          TopUp - est. June 2026 - made by{" "}
           <a className="font-semibold text-foreground hover:underline" href="https://github.com/sherine111" target="_blank" rel="noreferrer">
             @sherine111
           </a>
