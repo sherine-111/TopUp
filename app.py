@@ -6,136 +6,273 @@ import seaborn as sns
 import numpy as np
 import time
 
-# --- 1. PRODUCER LOADING ANIMATION MATRIX ---
-if 'loaded' not in st.session_state:
-    st.session_state['loaded'] = True
-    loading_placeholder = st.empty()
-    
-    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
-    
-    for emoji in emoji_sequence:
-        loading_placeholder.markdown(f"""
-            <style>
-            @import url('https://googleapis.com');
-            .load-screen {{
-                position: fixed;
-                top: 0; left: 0; width: 100vw; height: 100vh;
-                background-color: #ffffff !important;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                z-index: 999999;
-                font-family: 'Inter', sans-serif;
-            }}
-            .load-emoji-bar {{
-                font-size: 5rem;
-                margin-bottom: 20px;
-                min-height: 7rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }}
-            .load-text-bar {{
-                font-size: 1.4rem;
-                color: #000000;
-                font-weight: 500;
-                letter-spacing: -0.5px;
-            }}
-            </style>
-            <div class="load-screen">
-                <div class="load-emoji-bar">{emoji}</div>
-                <div class="load-text-bar">Your TopUp is loading...</div>
-            </div>
-        """, unsafe_allow_html=True)
-        time.sleep(0.7)
-        
-    loading_placeholder.empty()
-
-# --- 2. THEMATIC STYLE LAYOUT & SPECIFICATION INTERFACE ---
+# --- 1. PREMIUM NATIVE STREAMLIT INITIALIZATION ---
 st.set_page_config(page_title="TopUp", layout="wide")
 
+# --- 2. THEMATIC STYLE LAYOUT & LOVABLE HIGH-FIDELITY DESIGN ---
 st.markdown("""
     <style>
     @import url('https://googleapis.com');
     
-    /* Global Canvas Reset to Exact Five-Stage Color Spectrum File Specs */
+    /* Global Mesh Gradient Setup matching your precise sunset theme palette */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background: linear-gradient(to right, #f18721 0%, #f9c89e 35%, #ffffff 50%, #f9caf4 65%, #f182ea 100%) !important;
-        color: #000000 !important;
+        background: linear-gradient(135deg, #fcead9 0%, #fff7f0 45%, #fcd6ed 100%) !important;
+        color: #2b2524 !important;
     }
     
-    /* Cover Page Branding Headers */
-    .meta-header-grid {
+    /* Lovable Sticky Header Floating Navbar Frame */
+    .navbar-container {
         display: flex;
-        gap: 40px;
-        margin-bottom: 30px;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(12px);
+        padding: 12px 32px;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        margin-bottom: 60px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.02);
     }
-    .meta-item {
-        font-size: 0.85rem;
+    .nav-logo-side {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #db7667;
+    }
+    .nav-links-side {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+    }
+    .nav-btn-active {
+        background-color: #ff8b72;
+        color: white !important;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+    .nav-btn-link {
+        color: #544744 !important;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+
+    /* Live Header Pill Accent Tag */
+    .live-badge-pill {
+        display: inline-block;
+        background-color: rgba(255, 139, 114, 0.1);
+        color: #ff7253;
+        font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: #ff416c;
-    }
-    .hero-main-title {
-        font-size: 6rem;
-        font-weight: 800;
-        letter-spacing: -3px;
-        color: #000000;
-        line-height: 0.9;
-        margin-bottom: 25px;
+        padding: 6px 14px;
+        border-radius: 30px;
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 139, 114, 0.2);
     }
     
-    /* Minimalist White Card Block Specs */
-    .white-description-card {
-        background-color: #ffffff;
-        padding: 30px;
-        border-radius: 4px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        max-width: 440px;
-        font-size: 1.05rem;
+    /* Elegant High-End Typography */
+    .editorial-hero-title {
+        font-family: 'Instrument Serif', serif !important;
+        font-size: 5.5rem;
+        font-weight: 400;
+        color: #261614;
+        line-height: 1.0;
+        margin-bottom: 12px;
+    }
+    .editorial-hero-span {
+        background: linear-gradient(90deg, #ff8b72 0%, #e65c84 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: 'Instrument Serif', serif !important;
+        font-style: italic;
+    }
+    .editorial-hero-body {
+        max-width: 600px;
+        font-size: 1.15rem;
         line-height: 1.6;
-        color: #ff416c;
+        color: #61514e;
+        margin-bottom: 36px;
         font-weight: 400;
     }
     
-    /* Interactive Elements Highlight Modules */
-    .gradient-container-card {
-        background: rgba(255, 255, 255, 0.9);
-        color: #000000;
-        padding: 24px;
-        border-radius: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0 8px 32px rgba(241, 135, 33, 0.06);
-        margin-top: 20px;
-        margin-bottom: 30px;
+    /* Lovable Accent Interaction Action Buttons Block */
+    .cta-button-deck {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+    .primary-gradient-cta {
+        background: linear-gradient(90deg, #f99f7d 0%, #ff85a1 100%);
+        color: white !important;
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(249, 159, 125, 0.3);
+    }
+    .secondary-white-cta {
+        background-color: #ffffff;
+        color: #2b2524 !important;
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
     
-    /* Bouncing Scroll Indicator Icon */
-    .scroll-arrow-box {
-        display: flex;
-        justify-content: center;
+    /* Creator Signature Profile Bottom Frame Component */
+    .signature-badge {
+        display: inline-flex;
         align-items: center;
-        margin-top: 60px;
-        margin-bottom: 80px;
-        width: 100%;
+        gap: 8px;
+        background-color: #261614;
+        color: #fcead9 !important;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 100px;
     }
-    .scroll-arrow {
-        font-size: 2.5rem;
-        color: #000000;
-        animation: bounce 2s infinite;
+    
+    /* Scroll Header Metrics Layer Grid Blocks Setup */
+    .section-eyebrow {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #ff8b72;
+        margin-bottom: 4px;
     }
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-10px); }
-        60% { transform: translateY(-5px); }
+    .section-main-heading {
+        font-family: 'Instrument Serif', serif !important;
+        font-size: 3.5rem;
+        color: #261614;
+        margin-bottom: 30px;
+        font-weight: 400;
+    }
+    
+    /* High-End Glassmorphic Scorecard Metrics Units Layout */
+    .glass-metric-card {
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 24px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.01);
+    }
+    .glass-metric-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #8a7571;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+    .glass-metric-num {
+        font-family: 'Instrument Serif', serif !important;
+        font-size: 3.5rem;
+        color: #261614;
+        line-height: 1.0;
+        font-weight: 400;
+    }
+    .glass-metric-unit {
+        font-size: 0.9rem;
+        color: #8a7571;
+        font-weight: 400;
+        font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Navigation Card Hub Blocks */
+    .nav-routing-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 32px;
+        border-radius: 24px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        transition: transform 0.2s ease;
+    }
+    .nav-card-pill-tag {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #ef4444;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
+    .nav-card-title {
+        font-family: 'Instrument Serif', serif !important;
+        font-size: 2rem;
+        color: #261614;
+        margin-bottom: 8px;
+    }
+    .nav-card-desc {
+        color: #6b5a57;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 16px;
+    }
+    .nav-card-action-link {
+        color: #e65c84 !important;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+    }
+    
+    /* Footer Frame Layout Block */
+    .app-footer-bar {
+        text-align: center;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        font-size: 0.85rem;
+        color: #a38d88;
+        letter-spacing: -0.1px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. DATA & MODEL ARCHITECTURE SUBSYSTEM ---
+# --- 3. DYNAMIC SEQUENTIAL ANIMATED LOADING SEQUENCER ---
+if 'loaded' not in st.session_state:
+    st.session_state['loaded'] = True
+    loading_placeholder = st.empty()
+    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🪷", "🏖️"]
+    
+    for emoji in emoji_sequence:
+        loading_placeholder.markdown(f"""
+            <style>
+            .lovable-load-screen {{
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: linear-gradient(135deg, #fcead9 0%, #fff7f0 50%, #fcd6ed 100%) !important;
+                display: flex; flex-direction: column; align-items: center; justify-content: center;
+                z-index: 999999; font-family: 'Inter', sans-serif;
+            }}
+            .lovable-load-title {{ font-family: 'Instrument Serif', serif !important; font-size: 4rem; font-weight: 400; color: #ff8b72; margin-bottom: 4px; }}
+            .lovable-load-sub {{ font-size: 1.1rem; color: #8c7a76; font-weight: 400; }}
+            .lovable-load-emoji-frame {{ font-size: 3rem; margin-bottom: 16px; min-height: 4rem; display: flex; align-items: center; justify-content: center; }}
+            </style>
+            <div class="lovable-load-screen">
+                <div class="lovable-load-emoji-frame">{emoji}</div>
+                <div class="lovable-load-title">TopUp</div>
+                <div class="lovable-load-sub">Warming up the forecast...</div>
+            </div>
+        """, unsafe_allow_html=True)
+        time.sleep(0.7)
+    loading_placeholder.empty()
+
+# --- 4. BACKEND TRANSACTION HISTORY CALCULATOR ENGINE ---
 if 'custom_data' not in st.session_state:
     st.session_state['custom_data'] = None
 
@@ -148,8 +285,9 @@ raw_data = """Date,Time,Amount_HKD
 2026-06-19,07:56,0.0"""
 
 df = pd.read_csv(io.StringIO(raw_data)) if st.session_state['custom_data'] is None else st.session_state['custom_data']
+df.columns = df.columns.str.strip()
 
-df['Timestamp'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+df['Timestamp'] = pd.to_datetime(df['Date'].astype(str) + ' ' + df['Time'].astype(str))
 df = df.sort_values('Timestamp').reset_index(drop=True)
 df['Hours_Lasted'] = (df['Timestamp'].shift(-1) - df['Timestamp']).dt.total_seconds() / 3600
 df['Days_Lasted'] = df['Hours_Lasted'] / 24
@@ -161,90 +299,12 @@ historical_weather = pd.DataFrame({
 })
 analysis_df = pd.merge(df, historical_weather, on='Date', how='inner')
 
-# Mathematical calculation formulas bypassing sklearn wrappers to avoid type mismatches
+# Local linear regression modeling weights polyfit math calculations
 x_train_arr = np.array([31.2, 32.5, 33.1, 32.8, 29.4])
 y_train_arr = np.array([13.11, 11.75, 9.34, 11.29, 4.39])
 slope, intercept = np.polyfit(x_train_arr, y_train_arr, 1)
 
-# --- 4. PRETTIFIED SPLIT-SCREEN LANDING PAGE (COVER VIEW) ---
-hero_col1, hero_col2 = st.columns([1, 1.1], gap="large")
-
-with hero_col1:
-    st.markdown("""
-        <div class="meta-header-grid">
-            <div class="meta-item">Since<br><span style="color:#000000; font-weight:700;">June 2026</span></div>
-            <div class="meta-item">Created By<br><span style="color:#000000; font-weight:700;">@sherine111</span></div>
-        </div>
-        <div class="hero-main-title">TopUp</div>
-        <div class="white-description-card">
-            Welcome to TopUp. This platform analyzes the microclimate of rooms in student residences. 
-            By combining real-time financial reload data with local temperature, TopUp anticipates your 
-            expenses using machine learning models.
-        </div>
-    """, unsafe_allow_html=True)
-
-with hero_col2:
-    # High-fidelity integrated chart wrapper simulation matching mockup dashboard
-    fig, ax1 = plt.subplots(figsize=(6.5, 4.2), facecolor='white')
-    ax1.set_facecolor('#ffffff')
-    sns.set_theme(style="whitegrid")
-    
-    color = '#bc6c74'
-    ax1.set_xlabel('Top-Up Start Date', fontweight='bold', fontsize=8)
-    ax1.set_ylabel('Daily Burn Rate (HKD / Day)', color=color, fontweight='bold', fontsize=8)
-    sns.barplot(data=analysis_df, x='Date', y='Daily_Burn_Rate_HKD', color=color, alpha=0.8, ax=ax1)
-    ax1.tick_params(axis='both', labelsize=7)
-    
-    ax2 = ax1.twinx()
-    color = '#1d70b8'
-    ax2.set_ylabel('Observed Max Temperature (°C)', color=color, fontweight='bold', fontsize=8)
-    sns.lineplot(data=analysis_df, x=range(len(analysis_df)), y='Max_Temp_C', color=color, marker='o', linewidth=2.5, ax=ax2)
-    ax2.tick_params(axis='y', labelsize=7)
-    
-    plt.title('HKUST Hall AC Expense Velocity vs. Regional Temperature', fontsize=9, fontweight='bold', pad=10)
-    fig.tight_layout()
-    st.pyplot(fig)
-
-# Centered Scrolling Chevron Indicator
-st.markdown('<div class="scroll-arrow-box"><div class="scroll-arrow">︾</div></div>', unsafe_allow_html=True)
-
-# --- 5. SCROLLING LAYERS: DATA METRICS & FORECASTER ---
-st.markdown("### Portfolio Metrics Summary")
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric("Max Daily Burn Velocity", f"${analysis_df['Daily_Burn_Rate_HKD'].max():.2f} HKD/Day")
-with col2:
-    st.metric("Average Summer Burn Rate", f"${analysis_df['Daily_Burn_Rate_HKD'].mean():.2f} HKD/Day")
-with col3:
-    st.metric("Mathematical Heat Correlation", "0.64")
-
-st.dataframe(analysis_df[['Date', 'Amount_HKD', 'Days_Lasted', 'Daily_Burn_Rate_HKD', 'Max_Temp_C']], use_container_width=True)
-
-st.write("---")
-
-# ML INTERACTIVE MODEL ENGINE CANVAS
-st.markdown("### Machine Learning Forecast Canvas")
-st.markdown("Adjust the weather simulation slider below to dynamically estimate your upcoming card balance strain.")
-
-simulated_temp = st.slider("Simulated Next-Week Temperature Peak (°C)", min_value=24.0, max_value=38.0, value=33.0, step=0.5)
-
-# Execution block utilizing clear scalar variables to perfectly resolve folder/TypeErrors
-burn_scalar = float(simulated_temp * slope + intercept)
-weekly_total_scalar = float(burn_scalar * 7)
-
-st.markdown(f"""
-    <div class="gradient-container-card">
-        <h4 style="margin:0; padding-bottom:8px; font-weight:700;">Algorithmic Target Estimates</h4>
-        <p style="margin:0; font-size:1.1rem; padding-bottom:4px;">Predicted Daily Cash Burn Velocity: <b>${burn_scalar:.2f} HKD / Day</b></p>
-        <p style="margin:0; font-size:1.1rem;">Suggested 7-Day Card Top-Up Target: <b>${weekly_total_scalar:.2f} HKD</b></p>
-    </div>
-""", unsafe_allow_html=True)
-
-# --- 6. DATA CONSOLE UPLOADER DROPZONE (BOTTOM ANCHOR) ---
-st.write("---")
-st.markdown("### Step 1: Upload Portfolio Log")
-uploaded_file = st.file_uploader("Upload your raw topups.csv file to sync your active terminal history", type=["csv"])
-
-if uploaded_file is not None:
-    st.session_state['custom_data'] = pd.read_csv(uploaded_file)
-    st.success("Data layer successfully updated! Scroll back up to review your custom metrics summary.")
+# --- 5. FIXED USER INTERFACE NAVIGATION FLOATING HEADER NAVBAR ---
+st.markdown("""
+    <div class="navbar-container">
+        <div class="nav-logo-side">🌅 TopUp</div>
