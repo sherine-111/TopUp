@@ -128,7 +128,7 @@ function Loader({ onDone }: { onDone: () => void }) {
         </div>
         <div className="flex flex-col items-center gap-2">
           <div className="font-display text-3xl font-bold text-gradient-sunset">TopUp</div>
-          <div className="text-sm text-muted-foreground">Warming up the forecast…</div>
+          <div className="text-sm text-muted-foreground">Warming up the forecast… </div>
         </div>
       </div>
     </motion.div>
