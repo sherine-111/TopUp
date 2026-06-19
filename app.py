@@ -14,55 +14,13 @@ st.markdown("""
     <style>
     @import url('https://googleapis.com');
     
-    /* Global Mesh Gradient Setup matching your precise sunset theme palette */
+    /* Fixed 100% stable background layer mapping your custom color spectrum image */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background: linear-gradient(135deg, #fcead9 0%, #fff7f0 45%, #fcd6ed 100%) !important;
+        background: linear-gradient(135deg, #fff5eb 0%, #fffbf7 45%, #fae6f4 100%) !important;
         color: #2b2524 !important;
     }
     
-    /* Lovable Sticky Header Floating Navbar Frame */
-    .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.4);
-        backdrop-filter: blur(12px);
-        padding: 12px 32px;
-        border-radius: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        margin-bottom: 60px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-    }
-    .nav-logo-side {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        font-size: 1.2rem;
-        color: #db7667;
-    }
-    .nav-links-side {
-        display: flex;
-        gap: 24px;
-        align-items: center;
-    }
-    .nav-btn-active {
-        background-color: #ff8b72;
-        color: white !important;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-weight: 500;
-        font-size: 0.9rem;
-        text-decoration: none;
-    }
-    .nav-btn-link {
-        color: #544744 !important;
-        font-weight: 500;
-        font-size: 0.9rem;
-        text-decoration: none;
-    }
-
     /* Live Header Pill Accent Tag */
     .live-badge-pill {
         display: inline-block;
@@ -74,11 +32,12 @@ st.markdown("""
         letter-spacing: 1px;
         padding: 6px 14px;
         border-radius: 30px;
+        margin-top: 40px;
         margin-bottom: 24px;
         border: 1px solid rgba(255, 139, 114, 0.2);
     }
     
-    /* Elegant High-End Typography */
+    /* Elegant High-End Typography mimicking Lovable/Instrument Serif layouts */
     .editorial-hero-title {
         font-family: 'Instrument Serif', serif !important;
         font-size: 5.5rem;
@@ -103,34 +62,6 @@ st.markdown("""
         font-weight: 400;
     }
     
-    /* Lovable Accent Interaction Action Buttons Block */
-    .cta-button-deck {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 40px;
-    }
-    .primary-gradient-cta {
-        background: linear-gradient(90deg, #f99f7d 0%, #ff85a1 100%);
-        color: white !important;
-        padding: 12px 28px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 1rem;
-        text-decoration: none;
-        box-shadow: 0 4px 15px rgba(249, 159, 125, 0.3);
-    }
-    .secondary-white-cta {
-        background-color: #ffffff;
-        color: #2b2524 !important;
-        padding: 12px 28px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 1rem;
-        text-decoration: none;
-        border: 1px solid rgba(0,0,0,0.05);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-    }
-    
     /* Creator Signature Profile Bottom Frame Component */
     .signature-badge {
         display: inline-flex;
@@ -142,7 +73,7 @@ st.markdown("""
         border-radius: 30px;
         font-size: 0.85rem;
         font-weight: 500;
-        margin-bottom: 100px;
+        margin-bottom: 80px;
     }
     
     /* Scroll Header Metrics Layer Grid Blocks Setup */
@@ -200,9 +131,8 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.6);
         padding: 32px;
         border-radius: 24px;
-        margin-top: 40px;
+        margin-top: 20px;
         margin-bottom: 40px;
-        transition: transform 0.2s ease;
     }
     .nav-card-pill-tag {
         font-size: 0.75rem;
@@ -225,21 +155,13 @@ st.markdown("""
         line-height: 1.5;
         margin-bottom: 16px;
     }
-    .nav-card-action-link {
-        color: #e65c84 !important;
-        font-weight: 600;
-        font-size: 0.95rem;
-        text-decoration: none;
-    }
     
-    /* Footer Frame Layout Block */
     .app-footer-bar {
         text-align: center;
         padding-top: 60px;
         padding-bottom: 40px;
         font-size: 0.85rem;
         color: #a38d88;
-        letter-spacing: -0.1px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -248,31 +170,19 @@ st.markdown("""
 if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
-    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🪷", "🏖️"]
+    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
     
     for emoji in emoji_sequence:
         loading_placeholder.markdown(f"""
-            <style>
-            .lovable-load-screen {{
-                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background: linear-gradient(135deg, #fcead9 0%, #fff7f0 50%, #fcd6ed 100%) !important;
-                display: flex; flex-direction: column; align-items: center; justify-content: center;
-                z-index: 999999; font-family: 'Inter', sans-serif;
-            }}
-            .lovable-load-title {{ font-family: 'Instrument Serif', serif !important; font-size: 4rem; font-weight: 400; color: #ff8b72; margin-bottom: 4px; }}
-            .lovable-load-sub {{ font-size: 1.1rem; color: #8c7a76; font-weight: 400; }}
-            .lovable-load-emoji-frame {{ font-size: 3rem; margin-bottom: 16px; min-height: 4rem; display: flex; align-items: center; justify-content: center; }}
-            </style>
-            <div class="lovable-load-screen">
-                <div class="lovable-load-emoji-frame">{emoji}</div>
-                <div class="lovable-load-title">TopUp</div>
-                <div class="lovable-load-sub">Warming up the forecast...</div>
+            <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999999;">
+                <div style="font-size: 4.5rem; margin-bottom: 24px;">{emoji}</div>
+                <div style="font-size: 1.35rem; color: #000000; font-family: 'Inter', sans-serif; font-weight: 500;">Your TopUp is loading...</div>
             </div>
         """, unsafe_allow_html=True)
         time.sleep(0.7)
     loading_placeholder.empty()
 
-# --- 4. BACKEND TRANSACTION HISTORY CALCULATOR ENGINE ---
+# --- 4. BACKEND PROCESSING SYSTEMS ---
 if 'custom_data' not in st.session_state:
     st.session_state['custom_data'] = None
 
@@ -299,7 +209,72 @@ historical_weather = pd.DataFrame({
 })
 analysis_df = pd.merge(df, historical_weather, on='Date', how='inner')
 
-# Local linear regression modeling weights polyfit math calculations
 x_train_arr = np.array([31.2, 32.5, 33.1, 32.8, 29.4])
 y_train_arr = np.array([13.11, 11.75, 9.34, 11.29, 4.39])
 slope, intercept = np.polyfit(x_train_arr, y_train_arr, 1)
+
+# --- 5. FRONT COVER LANDING CONTENT (PAGE 1) ---
+st.markdown('<div class="live-badge-pill">● Live · Founded June 2026</div>', unsafe_allow_html=True)
+st.markdown('<h1 class="editorial-hero-title">Forecast your<br><span class="editorial-hero-span">residence spend.</span></h1>', unsafe_allow_html=True)
+st.markdown("""
+    <p class="editorial-hero-body">
+        TopUp analyzes the microclimate of rooms in student residences. By combining 
+        real-time financial reload data with local temperature, it anticipates your 
+        expenses using machine learning.
+    </p>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="signature-badge">✦ Crafted by @sherine111</div>', unsafe_allow_html=True)
+
+st.write("---")
+
+# --- 6. SCROLL DOWN LAYERS: PORTFOLIO METRICS ---
+st.markdown('<p class="section-eyebrow">Overview</p>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-main-heading">Portfolio metrics</h2>', unsafe_allow_html=True)
+
+m_col1, m_col2, m_col3 = st.columns(3)
+with m_col1:
+    st.markdown(f"""
+        <div class="glass-metric-card">
+            <div class="glass-metric-label">Max Daily Burn Velocity</div>
+            <div class="glass-metric-num">${analysis_df['Daily_Burn_Rate_HKD'].max():.2f} <span class="glass-metric-unit">HKD / day</span></div>
+        </div>
+    """, unsafe_allow_html=True)
+with m_col2:
+    st.markdown(f"""
+        <div class="glass-metric-card">
+            <div class="glass-metric-label">Avg Summer Burn Rate</div>
+            <div class="glass-metric-num">${analysis_df['Daily_Burn_Rate_HKD'].mean():.2f} <span class="glass-metric-unit">HKD / day</span></div>
+        </div>
+    """, unsafe_allow_html=True)
+with m_col3:
+    st.markdown(f"""
+        <div class="glass-metric-card">
+            <div class="glass-metric-label">Heat Correlation</div>
+            <div class="glass-metric-num">0.64 <span class="glass-metric-unit">r-coef</span></div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# Navigation Cards Block
+route_col1, route_col2 = st.columns(2)
+with route_col1:
+    st.markdown("""
+        <div class="nav-routing-card">
+            <div style="font-size:2.2rem; margin-bottom:10px;">📈</div>
+            <div class="nav-card-pill-tag">The data one</div>
+            <div class="nav-card-title">ML Forecast Canvas</div>
+            <div class="nav-card-desc">Slide the simulated heat dial and watch tomorrow's spend re-price in real time.</div>
+        </div>
+    """, unsafe_allow_html=True)
+with route_col2:
+    st.markdown("""
+        <div class="nav-routing-card">
+            <div style="font-size:2.2rem; margin-bottom:10px;">📊</div>
+            <div class="nav-card-pill-tag">The table one</div>
+            <div class="nav-card-title">Top-Up Log</div>
+            <div class="nav-card-desc">Every reload, days lasted, daily burn and room temperature in one tidy ledger.</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# --- 7. FUNCTIONAL ENGINE LOGIC MODULES ---
+st.write("---")
