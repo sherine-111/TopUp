@@ -305,6 +305,6 @@ y_train_arr = np.array([13.11, 11.75, 9.34, 11.29, 4.39])
 slope, intercept = np.polyfit(x_train_arr, y_train_arr, 1)
 
 # --- 5. FIXED USER INTERFACE NAVIGATION FLOATING HEADER NAVBAR ---
-st.markdown("""
+st.markdown(""
     <div class="navbar-container">
         <div class="nav-logo-side">🌅 TopUp</div>
