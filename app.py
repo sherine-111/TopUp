@@ -170,7 +170,7 @@ st.markdown("""
 if 'loaded' not in st.session_state:
     st.session_state['loaded'] = True
     loading_placeholder = st.empty()
-    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🇭🇰", "🪷", "🏖️"]
+    emoji_sequence = ["☀️", "🌧️", "🌈", "☁️", "🪷", "🏖️"]
     
     for emoji in emoji_sequence:
         loading_placeholder.markdown(f"""
