@@ -212,7 +212,6 @@ function Index() {
               className="mt-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground"
             >
               <span className="grid h-7 w-7 place-items-center rounded-full bg-foreground text-xs text-background">
-                ✦
               </span>
               Crafted by <span className="font-semibold text-foreground">@sherine111</span>
             </a>
