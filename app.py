@@ -325,7 +325,6 @@ st.markdown(f"""
               initial={{ x: 0 }}
               whileHover={{ x: 4 }}
             >
-              →
             </motion.span>
           </div>
         </div>
