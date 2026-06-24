@@ -223,7 +223,7 @@ with right_sidebar:
     st.markdown(f"""
         <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.9rem; color:#8f9bb3;">
             <span>Estimated Cost / Day</span>
-            <span style="color:#ffffff; font-weight:600;">${burn_scalar:.2f} HKD</span>
+            <span style="color:#ffffff; font-weight:601;">${burn_scalar:.2f} HKD</span>
         </div>
         <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:0.9rem; color:#8f9bb3;">
             <span>7-Day Budget Requirement</span>
